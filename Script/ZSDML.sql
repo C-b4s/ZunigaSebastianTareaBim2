@@ -40,11 +40,11 @@ INSERT OR IGNORE INTO ZSCatalogo
  ,(    4         , 'Mestizo'         , 'tipos de etnia')
  ,(    4         , 'Indigena'        , 'tipos de etnia');
 
-INSERT INTO ZSIABOT (ZSNombre   , ZSObservacion  )
+INSERT INTO ZSIABot (ZSNombre   , ZSObservacion  )
 VALUES            ('IA-RUSO', "Inteligencia Artificial");
 
 INSERT INTO ZSExobot 
- (IdZSIABOT      ,      ZSNombre,          ZSSerie) VALUES
+ (IdZSIABot      ,      ZSNombre,          ZSSerie) VALUES
  (1            , 'exobot1', 'Serie E1')
 ,(1            , 'exobot2', 'Serie E1');
 

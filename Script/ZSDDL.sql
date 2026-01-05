@@ -38,8 +38,8 @@ CREATE TABLE ZSCatalogo(
    , ZSFechaModificacion     DATETIME 
 );  
 
-CREATE TABLE ZSIABOT(
-     IdZSIABOT              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+CREATE TABLE ZSIABot(
+     IdZSIABot              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
    , ZSNombre               TEXT NOT NULL UNIQUE
    , ZSObservacion          TEXT
    , ZSFechaCreacion        DATETIME NOT NULL DEFAULT (datetime('now','localtime'))
@@ -48,12 +48,12 @@ CREATE TABLE ZSIABOT(
 
 CREATE TABLE ZSExobot(
       IdZSExobot            INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
-    , IdZSIABOT             INTEGER NOT NULL
+    , IdZSIABot             INTEGER NOT NULL
     , ZSNombre              TEXT NOT NULL 
     , ZSSerie               TEXT NOT NULL
     , ZSFechaCreacion       DATETIME NOT NULL DEFAULT (datetime('now','localtime'))
     , ZSFechaModificacion   DATETIME 
-    , CONSTRAINT fk_IABot FOREIGN KEY (IdZSIABOT) REFERENCES ZSIABOT(IdZSIABOT)
+    , CONSTRAINT fk_IABot FOREIGN KEY (IdZSIABot) REFERENCES ZSIABot(IdZSIABot)
 );
 
 -- CREATE TABLE PersonaTipo(

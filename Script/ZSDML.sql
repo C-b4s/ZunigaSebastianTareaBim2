@@ -1,4 +1,4 @@
--- database: ../DataBase/EXOBOT.sqlite
+-- database: ../DataBase/ZSEXOBOT.sqlite
 /*
 |----------------------------------------------|
 |  (©) 2K26 EPN-FIS, All rights reserved.      |
@@ -12,14 +12,14 @@ Script: Insertando catálogo
 */ 
 
 
-INSERT OR IGNORE INTO CatalogoTipo (Nombre, Descripcion) VALUES 
+INSERT OR IGNORE INTO ZSCatalogoTipo (ZSNombre, ZSDescripcion) VALUES 
 ('Tipo Persona', 'Tipos de personas: soldado, mecanico, etc.')
 ,('Sexo', 'Sexo de las personas: masculino, femenino, asexual o híbrido')
 ,('Estado Civil', 'Estado Civil de las personas: Sol, cas, viu, etc.')
 ,('Etnia', 'Etnia de las personas: Negro, blanco, mestizo, etc.');
 
-INSERT OR IGNORE INTO Catalogo 
-  (IdCatalogoTipo, Nombre           , Descripcion     ) VALUES
+INSERT OR IGNORE INTO ZSCatalogo 
+  (IdZSCatalogoTipo, ZSNombre           , ZSDescripcion     ) VALUES
   (    1         , 'Soldado'         , 'tipos de personas para el ejercito')--1
  ,(    1         , 'Mecanico'        , 'tipos de personas para el ejercito')--2
  ,(    1         , 'Experto Ingles'  , 'tipos de personas para el ejercito')--3
@@ -40,15 +40,15 @@ INSERT OR IGNORE INTO Catalogo
  ,(    4         , 'Mestizo'         , 'tipos de etnia')
  ,(    4         , 'Indigena'        , 'tipos de etnia');
 
-INSERT INTO IABOT (Nombre   , Observacion  )
+INSERT INTO ZSIABOT (ZSNombre   , ZSObservacion  )
 VALUES            ('IA-RUSO', "Inteligencia Artificial");
 
-INSERT INTO Exobot 
- (IdIABOT      ,      Nombre,          Serie) VALUES
+INSERT INTO ZSExobot 
+ (IdZSIABOT      ,      ZSNombre,          ZSSerie) VALUES
  (1            , 'exobot1', 'Serie E1')
 ,(1            , 'exobot2', 'Serie E1');
 
-INSERT INTO Persona(IdCatalogoTipoPersona ,IdCatalogoSexo ,IdCatalogoEstadoCivil ,Cedula  ,Nombre  ,Apellido) VALUES
+INSERT INTO ZSPersona(IdZSCatalogoTipoPersona ,IdZSCatalogoSexo ,IdZSCatalogoEstadoCivil ,ZSCedula  ,ZSNombre  ,ZSApellido) VALUES
                    (1                     ,       5       ,           9          ,"12321" ,"Sebas" ,"Putin"),               
                    (2                     ,       5       ,           10         ,"14235" ,"Andres","Garcia"),
                    (3                     ,       5       ,           11         ,"23854" ,"Julian","Perez"),

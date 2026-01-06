@@ -11,20 +11,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DataAccess.DTO.IZSDAO;
-import DataAccess.DTO.ZSEstadoCivilDTO;
+import DataAccess.DTO.ZSTipoPersonaDTO;
 
-public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> implements IZSDAO <ZSEstadoCivilDTO> {
-    private static final String zsTableName = "ZSEstadoCivil";
-    private static final String zsTablePK   = "idZSEstadoCivil";
-    public ZSEstadoCivilDAO() throws Exception {
-        super(ZSEstadoCivilDTO.class, zsTableName, zsTablePK);
+public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> implements IZSDAO <ZSTipoPersonaDTO> {
+
+    private static final String zsTableName = "ZSTipoPersona";
+    private static final String zsTablePK = "idZSTipoPersona";
+
+    public ZSTipoPersonaDAO() throws Exception {
+        super(ZSTipoPersonaDTO.class, zsTableName, zsTablePK);
+        //TODO Auto-generated constructor stub
     }
 
     @Override
-    public boolean zsCreate (ZSEstadoCivilDTO zsEntity) throws Exception {
+    public boolean zsCreate(ZSTipoPersonaDTO zsEntity) throws Exception {
         String zsQuery = "INSERT INTO Catalogo (IdZSCatalogoTipo, ZSNombre, ZSDescripcion) VALUES (?, ?, ?)";
         try (PreparedStatement zsStmt = zsOpenConnection().prepareStatement(zsQuery)) {
-            zsStmt.setObject(1, 3);
+            zsStmt.setObject(1, 1);
             zsStmt.setObject(2, zsEntity.getZSNombre());
             zsStmt.setObject(3, zsEntity.getZSDescripcion());
             zsStmt.executeUpdate();
@@ -34,10 +37,9 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
         }
     }
 
-
     @Override
-    public List<ZSEstadoCivilDTO> zsReadAll() throws Exception {
-        List <ZSEstadoCivilDTO> zsList = new ArrayList<>();
+    public List<ZSTipoPersonaDTO> zsReadAll() throws Exception {
+        List <ZSTipoPersonaDTO> zsList = new ArrayList<>();
         String zsQuery = "SELECT IdZSCatalogo            "
                        +" ,IdZSCatalogoTipo            "
                        +" ,ZSNombre                    "
@@ -47,13 +49,13 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
                        +" ,ZSFechaModificacion         "
                        +" FROM      ZSCatalogo         "
                        +" WHERE     ZSEstado = 'A'     "
-                       +" AND IdZSCatalogoTipo = 3     ";
+                       +" AND IdZSCatalogoTipo = 1     ";
         try{
             Connection zsConn = zsOpenConnection();
             Statement zsStmt = zsConn.createStatement();
             ResultSet zsRs = zsStmt.executeQuery(zsQuery);
             while(zsRs.next()){
-                ZSEstadoCivilDTO zsEc = new ZSEstadoCivilDTO(
+                ZSTipoPersonaDTO zsTipoPersona = new ZSTipoPersonaDTO(
                     zsRs.getInt(1),
                     zsRs.getInt(2),
                     zsRs.getString(3),
@@ -62,19 +64,17 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
                     zsRs.getString(6),
                     zsRs.getString(7)
                 );
-                zsList.add(zsEc);
+                zsList.add(zsTipoPersona);
             }
         }catch(SQLException e){
             throw e; 
-        }                                                                 
-
+        }           
+        
         return zsList;
     }
 
-
-
     @Override
-    public boolean zsUpdate(ZSEstadoCivilDTO zsEntity) throws Exception{
+    public boolean zsUpdate(ZSTipoPersonaDTO zsEntity) throws Exception {
         DateTimeFormatter zsDtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime zsNow = LocalDateTime.now();
         String zsQuery = "UPDATE ZSCatalogo SET ZSNombre = ?, ZSDescripcion = ?, ZSFechaModificacion = ? WHERE IdZSCatalogo = ?";
@@ -108,8 +108,8 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
     }
 
     @Override
-    public ZSEstadoCivilDTO zsReadBy(Integer zsId) throws Exception{
-        ZSEstadoCivilDTO zsEc = new ZSEstadoCivilDTO();
+    public ZSTipoPersonaDTO zsReadBy(Integer zsId) throws Exception {
+        ZSTipoPersonaDTO zsTipoPersona = new ZSTipoPersonaDTO();
         String zsQuery = "SELECT IdZSCatalogo            "
                        +" ,IdZSCatalogoTipo            "
                        +" ,ZSNombre                    "
@@ -119,7 +119,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
                        +" ,ZSFechaModificacion         "
                        +" FROM      ZSCatalogo           "
                        +" WHERE     ZSEstado = 'A'     "
-                       +" AND IdZSCatalogoTipo = 3     "
+                       +" AND IdZSCatalogoTipo = 1     "
                        +" AND IdZSCatalogo = " + zsId.toString();        
 
         try{
@@ -127,7 +127,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             Statement zsStmt = zsConn.createStatement();
             ResultSet zsRs = zsStmt.executeQuery(zsQuery);
             while(zsRs.next()){
-                zsEc = new ZSEstadoCivilDTO(
+                zsTipoPersona = new ZSTipoPersonaDTO(
                     zsRs.getInt(1),
                     zsRs.getInt(2),
                     zsRs.getString(3),
@@ -142,14 +142,14 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             throw e;
         }
 
-        return zsEc;
+        return zsTipoPersona;
     }
 
     public Integer getRowCount() throws Exception{
         String query = "SELECT COUNT(*) TotalReg   "
                      + "FROM    ZSCatalogo           "
                      + "WHERE ZSEstado = 'A'       "
-                     + "AND IdZSCatalogoTipo = 3   ";
+                     + "AND IdZSCatalogoTipo = 1   ";
 
         try{
             Connection zsConn = zsOpenConnection();
@@ -164,5 +164,6 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
         }
         return 0;
     }
+    
 
 }

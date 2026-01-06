@@ -10,9 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DataAccess.DTO.IZSDAO;
 import DataAccess.DTO.ZSSexoDTO;
 
-public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO>{
+public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<ZSSexoDTO> {
     private static final String zsTableName = "ZSSexo";
     private static final String zsTablePK   = "idZSSexo";
 
@@ -160,7 +161,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO>{
             }
             
         }catch (SQLException e){
-            System.out.println(e.getMessage());
+            throw e;
         }
         return 0;
     }

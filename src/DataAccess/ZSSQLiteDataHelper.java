@@ -15,7 +15,7 @@ public class ZSSQLiteDataHelper <T> implements IZSDAO<T> {
     protected final String  zsTableName;
     protected final String  zsTablePK;
 
-    private static final String zsDBPath = "jdbc:sqlite:db//ZSEXOBOT.sqlite";
+    private static final String zsDBPath = "jdbc:sqlite:DataBase/ZSEXOBOT.sqlite";
     private static Connection zsConn = null;
 
     protected static synchronized Connection zsOpenConnection() throws SQLException {
@@ -60,9 +60,9 @@ public class ZSSQLiteDataHelper <T> implements IZSDAO<T> {
             String zsName = zsField.getName();
             // Excluir PK y campos por defecto y auditoria
             if (!zsName.equalsIgnoreCase(zsTablePK)
-                && !zsName.equalsIgnoreCase("Estado")
-                && !zsName.equalsIgnoreCase("FechaCreacion")
-                && !zsName.equalsIgnoreCase("FechaModifica")) {
+                && !zsName.equalsIgnoreCase("ZSEstado")
+                && !zsName.equalsIgnoreCase("ZSFechaCreacion")
+                && !zsName.equalsIgnoreCase("ZSFechaModificacion")) {
                 zsColumns.append(zsName).append(",");
                 zsPlaceholders.append("?,");
             }
@@ -79,9 +79,9 @@ public class ZSSQLiteDataHelper <T> implements IZSDAO<T> {
             for (Field zsField : zsFields) {
                 String zsName = zsField.getName();
                 if (!zsName.equalsIgnoreCase(zsTablePK)
-                    && !zsName.equalsIgnoreCase("Estado")
-                    && !zsName.equalsIgnoreCase("FechaCreacion")
-                    && !zsName.equalsIgnoreCase("FechaModifica")) 
+                    && !zsName.equalsIgnoreCase("ZSEstado")
+                    && !zsName.equalsIgnoreCase("ZSFechaCreacion")
+                    && !zsName.equalsIgnoreCase("ZSFechaModificacion")) 
                         zsStmt.setObject(zsIndex++, zsField.get(zsEntity));
             }
             return (zsStmt.executeUpdate() > 0);

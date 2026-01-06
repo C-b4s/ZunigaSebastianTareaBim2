@@ -9,7 +9,7 @@
 Autor: Sebastián Zúñiga
 Fecha Creación: 04.enero.2K26
 Script: Insertando catálogo
-*/ 
+*/  
 
 
 INSERT OR IGNORE INTO ZSCatalogoTipo (ZSNombre, ZSDescripcion) VALUES 
@@ -18,7 +18,7 @@ INSERT OR IGNORE INTO ZSCatalogoTipo (ZSNombre, ZSDescripcion) VALUES
 ,('Estado Civil', 'Estado Civil de las personas: Sol, cas, viu, etc.')
 ,('Etnia', 'Etnia de las personas: Negro, blanco, mestizo, etc.');
 
-INSERT OR IGNORE INTO ZSCatalogo 
+INSERT INTO ZSCatalogo 
   (IdZSCatalogoTipo, ZSNombre           , ZSDescripcion     ) VALUES
   (    1         , 'Soldado'         , 'tipos de personas para el ejercito')--1
  ,(    1         , 'Mecanico'        , 'tipos de personas para el ejercito')--2
@@ -57,3 +57,23 @@ INSERT INTO ZSPersona(IdZSCatalogoTipoPersona ,IdZSCatalogoSexo ,IdZSCatalogoEst
                    (2                     ,       6       ,           10         ,"26436" ,"Sofia" ,"Lopez"),
                    (3                     ,       6       ,           11         ,"64644" ,"Maria" ,"Putin"),
                    (4                     ,       6       ,           12         ,"74574" ,"Taylor","Smith");
+
+PRAGMA database_list;
+
+
+SELECT
+    IdZSCatalogo,
+    IdZSCatalogoTipo,
+    ZSNombre,
+    ZSDescripcion,
+    ZSEstado,
+    ZSFechaCreacion,
+    ZSFechaModificacion
+FROM ZSCatalogo
+WHERE ZSNombre IN ('Masculino', 'Femenino', 'Hibrido', 'Asexual');
+
+SELECT COUNT(*) TotalReg
+FROM    ZSCatalogo        
+WHERE ZSEstado = 'A'    
+AND IdZSCatalogoTipo = 2
+

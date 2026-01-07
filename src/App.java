@@ -6,6 +6,7 @@ import ZSDataAccess.ZSDTO.ZSEstadoCivilDTO;
 import ZSDataAccess.ZSDTO.ZSEtniaDTO;
 import ZSDataAccess.ZSDTO.ZSSexoDTO;
 import ZSDataAccess.ZSDTO.ZSTipoPersonaDTO;
+import ZSGraphicUserInterface.ZSForm.ZSSplashScreenForm;
 
 public class App {
 
@@ -59,27 +60,29 @@ public class App {
         // }
 
         //Testing BL
-        try{
+        // try{
                       
-            ZSTipoPersonaBL zsTipoPersona = new ZSTipoPersonaBL();
-            for (ZSTipoPersonaDTO zsTp : zsTipoPersona.zsGetAll()) 
-                System.out.println(zsTp.toString());
+        //     ZSTipoPersonaBL zsTipoPersona = new ZSTipoPersonaBL();
+        //     for (ZSTipoPersonaDTO zsTp : zsTipoPersona.zsGetAll()) 
+        //         System.out.println(zsTp.toString());
 
-             ZSSexoBL zsSexo = new ZSSexoBL();
-            for (ZSSexoDTO zsSexoDTO : zsSexo.zsGetAll()) 
-                System.out.println(zsSexoDTO.toString());
+        //      ZSSexoBL zsSexo = new ZSSexoBL();
+        //     for (ZSSexoDTO zsSexoDTO : zsSexo.zsGetAll()) 
+        //         System.out.println(zsSexoDTO.toString());
 
-            ZSEstadoCivilBL zsEstadoCivil = new ZSEstadoCivilBL();
-            for (ZSEstadoCivilDTO zsEc : zsEstadoCivil.zsGetAll())
-                System.out.println(zsEc.toString());
+        //     ZSEstadoCivilBL zsEstadoCivil = new ZSEstadoCivilBL();
+        //     for (ZSEstadoCivilDTO zsEc : zsEstadoCivil.zsGetAll())
+        //         System.out.println(zsEc.toString());
 
-            ZSEtniaBL zsEtnia = new ZSEtniaBL();
-            for (ZSEtniaDTO zsEt : zsEtnia.zsGetAll())
-                System.out.println(zsEt.toString());
+        //     ZSEtniaBL zsEtnia = new ZSEtniaBL();
+        //     for (ZSEtniaDTO zsEt : zsEtnia.zsGetAll())
+        //         System.out.println(zsEt.toString());
 
-        }catch (Exception e){   
-            throw e;
-        }
+        // }catch (Exception e){   
+        //     throw e;
+        // }
+
+        ZSSplashScreenForm.show();
 
 
     }

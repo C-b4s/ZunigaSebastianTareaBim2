@@ -75,5 +75,7 @@ WHERE ZSNombre IN ('Masculino', 'Femenino', 'Hibrido', 'Asexual');
 SELECT COUNT(*) TotalReg
 FROM    ZSCatalogo        
 WHERE ZSEstado = 'A'    
-AND IdZSCatalogoTipo = 2
+AND IdZSCatalogoTipo = 2;
 
+CREATE UNIQUE INDEX idx_sexo
+ON ZSCatalogo (ZSNombre);

@@ -1,6 +1,6 @@
-package DataAccess.DTO;
+package ZSDataAccess.ZSDTO;
 
-public class ZSSexoDTO {
+public class ZSEstadoCivilDTO {
     private Integer zsIdCatalogo;
     private Integer zsIdCatalogoTipo;
     private String zsNombre;
@@ -9,9 +9,9 @@ public class ZSSexoDTO {
     private String zsFechaCreacion;
     private String zsFechaModificacion;
 
-    public ZSSexoDTO() {}
+    public ZSEstadoCivilDTO() {}
     
-    public ZSSexoDTO(Integer zsIdCatalogo, Integer zsIdCatalogoTipo, String zsNombre, String zsDescripcion,
+    public ZSEstadoCivilDTO(Integer zsIdCatalogo, Integer zsIdCatalogoTipo, String zsNombre, String zsDescripcion,
             String zsEstado, String zsFechaCreacion, String zsFechaModificacion) {
         this.zsIdCatalogo = zsIdCatalogo;
         this.zsIdCatalogoTipo = zsIdCatalogoTipo;
@@ -88,6 +88,4 @@ public class ZSSexoDTO {
                + "\n fechaModificacion    " + zsFechaModificacion;
     }
 
-     
-   
 }

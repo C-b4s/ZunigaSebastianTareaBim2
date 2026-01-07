@@ -1,4 +1,4 @@
-package DataAccess;
+package ZSDataAccess;
 
 import java.sql.Statement;
 import java.time.LocalDateTime;
@@ -10,20 +10,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import DataAccess.DTO.IZSDAO;
-import DataAccess.DTO.ZSSexoDTO;
+import ZSDataAccess.ZSDTO.IZSDAO;
+import ZSDataAccess.ZSDTO.ZSSexoDTO;
+import ZSFramework.ZSException;
 
 public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<ZSSexoDTO> {
-    private static final String zsTableName = "ZSSexo";
-    private static final String zsTablePK   = "idZSSexo";
-
-    public ZSSexoDAO() throws Exception {
-        super(ZSSexoDTO.class, zsTableName, zsTablePK);
-    }
+    
 
     @Override
     public boolean zsCreate(ZSSexoDTO zsEntity) throws Exception {
-        String zsQuery = "INSERT INTO Catalogo (IdZSCatalogoTipo, ZSNombre, ZSDescripcion) VALUES (?, ?, ?)";
+        String zsQuery = "INSERT INTO ZSCatalogo (IdZSCatalogoTipo, ZSNombre, ZSDescripcion) VALUES (?, ?, ?)";
         try (PreparedStatement zsStmt = zsOpenConnection().prepareStatement(zsQuery)) {
             zsStmt.setObject(1, 2);
             zsStmt.setObject(2, zsEntity.getZSNombre());
@@ -31,7 +27,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
             zsStmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
     }
 
@@ -66,7 +62,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
                 zsList.add(zsSexo);
             }
         }catch(SQLException e){
-            throw e; 
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
         }                                                                 
 
         return zsList;
@@ -89,7 +85,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
         }   
     }
 
@@ -104,7 +100,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
         }
     }
 
@@ -140,13 +136,13 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
                 
             }
         }catch(SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
 
         return zsSexo;
     }
 
-    public Integer getRowCount() throws Exception{
+    public Integer zsGetRowCount() throws Exception{
         String query = "SELECT COUNT(*) TotalReg   "
                      + "FROM    ZSCatalogo           "
                      + "WHERE ZSEstado = 'A'       "
@@ -161,7 +157,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
             }
             
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
         }
         return 0;
     }

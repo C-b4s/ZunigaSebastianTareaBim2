@@ -1,4 +1,4 @@
-package DataAccess.DTO;
+package ZSDataAccess.ZSDTO;
 
 public class ZSTipoPersonaDTO {
     private Integer zsIdCatalogo;

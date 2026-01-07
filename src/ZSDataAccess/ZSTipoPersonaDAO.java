@@ -1,4 +1,4 @@
-package DataAccess;
+package ZSDataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,18 +10,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import DataAccess.DTO.IZSDAO;
-import DataAccess.DTO.ZSTipoPersonaDTO;
+import ZSDataAccess.ZSDTO.IZSDAO;
+import ZSDataAccess.ZSDTO.ZSTipoPersonaDTO;
+import ZSFramework.ZSException;
 
 public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> implements IZSDAO <ZSTipoPersonaDTO> {
 
-    private static final String zsTableName = "ZSTipoPersona";
-    private static final String zsTablePK = "idZSTipoPersona";
-
-    public ZSTipoPersonaDAO() throws Exception {
-        super(ZSTipoPersonaDTO.class, zsTableName, zsTablePK);
-        //TODO Auto-generated constructor stub
-    }
 
     @Override
     public boolean zsCreate(ZSTipoPersonaDTO zsEntity) throws Exception {
@@ -33,7 +27,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
             zsStmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
     }
 
@@ -67,7 +61,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
                 zsList.add(zsTipoPersona);
             }
         }catch(SQLException e){
-            throw e; 
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
         }           
         
         return zsList;
@@ -88,7 +82,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }   
     }
 
@@ -103,7 +97,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
     }
 
@@ -139,13 +133,13 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
                 
             }
         }catch(SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
 
         return zsTipoPersona;
     }
 
-    public Integer getRowCount() throws Exception{
+    public Integer zsGetRowCount() throws Exception{
         String query = "SELECT COUNT(*) TotalReg   "
                      + "FROM    ZSCatalogo           "
                      + "WHERE ZSEstado = 'A'       "
@@ -160,7 +154,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
             }
             
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
         return 0;
     }

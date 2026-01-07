@@ -1,4 +1,4 @@
-package DataAccess.DTO;
+package ZSDataAccess.ZSDTO;
 
 import java.util.List;
 

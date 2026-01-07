@@ -1,4 +1,4 @@
-package DataAccess;
+package ZSDataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,34 +10,29 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import DataAccess.DTO.IZSDAO;
-import DataAccess.DTO.ZSEstadoCivilDTO;
+import ZSDataAccess.ZSDTO.IZSDAO;
+import ZSDataAccess.ZSDTO.ZSEtniaDTO;
+import ZSFramework.ZSException;
 
-public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> implements IZSDAO <ZSEstadoCivilDTO> {
-    private static final String zsTableName = "ZSEstadoCivil";
-    private static final String zsTablePK   = "idZSEstadoCivil";
-    public ZSEstadoCivilDAO() throws Exception {
-        super(ZSEstadoCivilDTO.class, zsTableName, zsTablePK);
-    }
-
+public class ZSEtniaDAO extends ZSSQLiteDataHelper <ZSEtniaDTO> implements IZSDAO <ZSEtniaDTO>{
+    
     @Override
-    public boolean zsCreate (ZSEstadoCivilDTO zsEntity) throws Exception {
+    public boolean zsCreate(ZSEtniaDTO zsEntity) throws Exception {
         String zsQuery = "INSERT INTO Catalogo (IdZSCatalogoTipo, ZSNombre, ZSDescripcion) VALUES (?, ?, ?)";
         try (PreparedStatement zsStmt = zsOpenConnection().prepareStatement(zsQuery)) {
-            zsStmt.setObject(1, 3);
+            zsStmt.setObject(1, 4);
             zsStmt.setObject(2, zsEntity.getZSNombre());
             zsStmt.setObject(3, zsEntity.getZSDescripcion());
             zsStmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
         }
     }
 
-
     @Override
-    public List<ZSEstadoCivilDTO> zsReadAll() throws Exception {
-        List <ZSEstadoCivilDTO> zsList = new ArrayList<>();
+    public List<ZSEtniaDTO> zsReadAll() throws Exception {
+        List <ZSEtniaDTO> zsList = new ArrayList<>();
         String zsQuery = "SELECT IdZSCatalogo            "
                        +" ,IdZSCatalogoTipo            "
                        +" ,ZSNombre                    "
@@ -47,13 +42,13 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
                        +" ,ZSFechaModificacion         "
                        +" FROM      ZSCatalogo         "
                        +" WHERE     ZSEstado = 'A'     "
-                       +" AND IdZSCatalogoTipo = 3     ";
+                       +" AND IdZSCatalogoTipo = 4     ";
         try{
             Connection zsConn = zsOpenConnection();
             Statement zsStmt = zsConn.createStatement();
             ResultSet zsRs = zsStmt.executeQuery(zsQuery);
             while(zsRs.next()){
-                ZSEstadoCivilDTO zsEc = new ZSEstadoCivilDTO(
+                ZSEtniaDTO zsEtnia = new ZSEtniaDTO(
                     zsRs.getInt(1),
                     zsRs.getInt(2),
                     zsRs.getString(3),
@@ -62,19 +57,17 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
                     zsRs.getString(6),
                     zsRs.getString(7)
                 );
-                zsList.add(zsEc);
+                zsList.add(zsEtnia);
             }
         }catch(SQLException e){
-            throw e; 
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }                                                                 
 
         return zsList;
     }
 
-
-
     @Override
-    public boolean zsUpdate(ZSEstadoCivilDTO zsEntity) throws Exception{
+    public boolean zsUpdate(ZSEtniaDTO zsEntity) throws Exception {
         DateTimeFormatter zsDtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime zsNow = LocalDateTime.now();
         String zsQuery = "UPDATE ZSCatalogo SET ZSNombre = ?, ZSDescripcion = ?, ZSFechaModificacion = ? WHERE IdZSCatalogo = ?";
@@ -88,7 +81,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }   
     }
 
@@ -103,13 +96,13 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
     }
 
     @Override
-    public ZSEstadoCivilDTO zsReadBy(Integer zsId) throws Exception{
-        ZSEstadoCivilDTO zsEc = new ZSEstadoCivilDTO();
+    public ZSEtniaDTO zsReadBy(Integer zsId) throws Exception {
+    ZSEtniaDTO zsEtnia = new ZSEtniaDTO();
         String zsQuery = "SELECT IdZSCatalogo            "
                        +" ,IdZSCatalogoTipo            "
                        +" ,ZSNombre                    "
@@ -119,7 +112,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
                        +" ,ZSFechaModificacion         "
                        +" FROM      ZSCatalogo           "
                        +" WHERE     ZSEstado = 'A'     "
-                       +" AND IdZSCatalogoTipo = 3     "
+                       +" AND IdZSCatalogoTipo = 4     "
                        +" AND IdZSCatalogo = " + zsId.toString();        
 
         try{
@@ -127,7 +120,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             Statement zsStmt = zsConn.createStatement();
             ResultSet zsRs = zsStmt.executeQuery(zsQuery);
             while(zsRs.next()){
-                zsEc = new ZSEstadoCivilDTO(
+                zsEtnia = new ZSEtniaDTO(
                     zsRs.getInt(1),
                     zsRs.getInt(2),
                     zsRs.getString(3),
@@ -139,17 +132,17 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
                 
             }
         }catch(SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
 
-        return zsEc;
-    }
+        return zsEtnia;
+}
 
-    public Integer getRowCount() throws Exception{
+public Integer zsGetRowCount() throws Exception{
         String query = "SELECT COUNT(*) TotalReg   "
                      + "FROM    ZSCatalogo           "
                      + "WHERE ZSEstado = 'A'       "
-                     + "AND IdZSCatalogoTipo = 3   ";
+                     + "AND IdZSCatalogoTipo = 4   ";
 
         try{
             Connection zsConn = zsOpenConnection();
@@ -160,9 +153,8 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             }
             
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
         }
         return 0;
     }
-
 }

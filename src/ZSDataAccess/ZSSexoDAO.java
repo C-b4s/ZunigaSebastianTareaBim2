@@ -27,7 +27,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
             zsStmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsCreate()");
         }
     }
 
@@ -85,7 +85,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsUpdate()"); 
         }   
     }
 
@@ -100,7 +100,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsDelete()"); 
         }
     }
 
@@ -136,7 +136,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
                 
             }
         }catch(SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadBy()");
         }
 
         return zsSexo;
@@ -157,7 +157,7 @@ public class ZSSexoDAO extends ZSSQLiteDataHelper<ZSSexoDTO> implements IZSDAO<Z
             }
             
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsGetRowCount()"); 
         }
         return 0;
     }

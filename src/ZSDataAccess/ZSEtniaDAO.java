@@ -26,7 +26,7 @@ public class ZSEtniaDAO extends ZSSQLiteDataHelper <ZSEtniaDTO> implements IZSDA
             zsStmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()"); 
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsCreate()"); 
         }
     }
 
@@ -81,7 +81,7 @@ public class ZSEtniaDAO extends ZSSQLiteDataHelper <ZSEtniaDTO> implements IZSDA
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsUpdate()");
         }   
     }
 
@@ -96,7 +96,7 @@ public class ZSEtniaDAO extends ZSSQLiteDataHelper <ZSEtniaDTO> implements IZSDA
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsDelete()");
         }
     }
 
@@ -132,7 +132,7 @@ public class ZSEtniaDAO extends ZSSQLiteDataHelper <ZSEtniaDTO> implements IZSDA
                 
             }
         }catch(SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadBy()");
         }
 
         return zsEtnia;
@@ -153,7 +153,7 @@ public Integer zsGetRowCount() throws Exception{
             }
             
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsGetRowCount()");
         }
         return 0;
     }

@@ -27,7 +27,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
             zsStmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsCreate()");
         }
     }
 
@@ -82,7 +82,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsUpdate()");
         }   
     }
 
@@ -97,7 +97,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsDelete()");
         }
     }
 
@@ -133,7 +133,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
                 
             }
         }catch(SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadBy()");
         }
 
         return zsTipoPersona;
@@ -154,7 +154,7 @@ public class ZSTipoPersonaDAO extends ZSSQLiteDataHelper <ZSTipoPersonaDTO> impl
             }
             
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsGetRowCount()");
         }
         return 0;
     }

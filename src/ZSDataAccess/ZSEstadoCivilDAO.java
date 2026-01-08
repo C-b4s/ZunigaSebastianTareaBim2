@@ -26,7 +26,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             zsStmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsCreate()");
         }
     }
 
@@ -84,7 +84,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsUpdate()");
         }   
     }
 
@@ -99,7 +99,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             zsPstmt.executeUpdate();
             return true;
         }catch (SQLException e){
-            throw e;
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsDelete()");
         }
     }
 
@@ -135,7 +135,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
                 
             }
         }catch(SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadBy()");
         }
 
         return zsEc;
@@ -156,7 +156,7 @@ public class ZSEstadoCivilDAO extends ZSSQLiteDataHelper <ZSEstadoCivilDTO> impl
             }
             
         }catch (SQLException e){
-            throw new ZSException(e.getMessage(), getClass().getName(), "zsReadAll()");
+            throw new ZSException(e.getMessage(), getClass().getName(), "zsGetRowCount()");
         }
         return 0;
     }

@@ -6,6 +6,7 @@ import ZSDataAccess.ZSDTO.ZSEstadoCivilDTO;
 import ZSDataAccess.ZSDTO.ZSEtniaDTO;
 import ZSDataAccess.ZSDTO.ZSSexoDTO;
 import ZSDataAccess.ZSDTO.ZSTipoPersonaDTO;
+import ZSGraphicUserInterface.ZSForm.ZSMainForm;
 import ZSGraphicUserInterface.ZSForm.ZSSplashScreenForm;
 
 public class App {
@@ -83,7 +84,7 @@ public class App {
         // }
 
         ZSSplashScreenForm.show();
-
+        ZSMainForm zsMainForm = new ZSMainForm("IABot");
 
     }
 }
